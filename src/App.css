@@ -1,0 +1,275 @@
+.app-shell {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 24px;
+}
+
+.topbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: end;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: 0;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+h1 {
+  max-width: 760px;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--surface);
+  color: var(--text-h);
+  cursor: pointer;
+  min-height: 38px;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+button:hover {
+  border-color: var(--accent);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.primary-action {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 800;
+  padding: 0 18px;
+}
+
+.control-strip {
+  display: grid;
+  grid-template-columns: minmax(300px, 1.7fr) minmax(300px, 1.5fr) repeat(3, minmax(150px, 0.8fr));
+  gap: 12px;
+  align-items: stretch;
+}
+
+.control-group,
+.range-control,
+.metrics,
+.action-row {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.control-group,
+.range-control {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+}
+
+.control-group > span,
+.range-control span,
+.metrics span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.segmented button {
+  min-width: 0;
+  padding: 0 8px;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.segmented button.active {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+  color: var(--accent-strong);
+}
+
+.range-control input {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+  flex: 1;
+}
+
+.metrics {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+}
+
+.metrics div {
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+}
+
+.metrics strong {
+  color: var(--text-h);
+  font-size: 24px;
+  line-height: 1;
+}
+
+.grid-board {
+  display: grid;
+  gap: 2px;
+  align-self: start;
+  width: 100%;
+  padding: 10px;
+  background: var(--grid-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-sizing: border-box;
+  touch-action: none;
+  user-select: none;
+}
+
+.cell {
+  aspect-ratio: 1;
+  min-height: 0;
+  min-width: 0;
+  border: 0;
+  border-radius: 3px;
+  background: var(--cell);
+  box-shadow: inset 0 0 0 1px var(--cell-border);
+}
+
+.cell:hover {
+  background: var(--cell-hover);
+}
+
+.cell.wall {
+  background: var(--wall);
+  box-shadow: none;
+}
+
+.cell.visited {
+  background: var(--visited);
+}
+
+.cell.path {
+  background: var(--path);
+  box-shadow: 0 0 0 1px rgba(242, 177, 52, 0.34);
+}
+
+.cell.start,
+.cell.target {
+  position: relative;
+}
+
+.cell.start::after,
+.cell.target::after {
+  content: '';
+  position: absolute;
+  inset: 24%;
+  border-radius: 50%;
+}
+
+.cell.start::after {
+  background: var(--start);
+}
+
+.cell.target::after {
+  background: var(--target);
+}
+
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+  padding: 12px;
+}
+
+.action-row button {
+  padding: 0 14px;
+  font-weight: 750;
+}
+
+@media (max-width: 1120px) {
+  .control-strip,
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .metrics {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .app-shell {
+    padding: 16px;
+  }
+
+  .topbar {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .primary-action {
+    width: 100%;
+  }
+
+  .control-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .segmented {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-board {
+    gap: 1px;
+    padding: 6px;
+  }
+}
